@@ -59,11 +59,18 @@ cd $builddir
 rm -rf Nordzy-cursors
 
 # Install floorp-browser
+#nala install apt-transport-https curl -y
+#curl -fsSL https://ppa.ablaze.one/KEY.gpg | gpg --dearmor -o /usr/share/keyrings/Floorp.gpg
+#curl -sS --compressed -o /etc/apt/sources.list.d/Floorp.list 'https://ppa.ablaze.one/Floorp.list'
+#nala update
+#nala install floorp -y
+
+# Install brave-browser
 nala install apt-transport-https curl -y
-curl -fsSL https://ppa.ablaze.one/KEY.gpg | gpg --dearmor -o /usr/share/keyrings/Floorp.gpg
-curl -sS --compressed -o /etc/apt/sources.list.d/Floorp.list 'https://ppa.ablaze.one/Floorp.list'
+curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" > /etc/apt/sources.list.d/brave-browser-release.list
 nala update
-nala install floorp -y
+nala install brave-browser -y
 
 # Enable graphical login and change target from CLI to GUI
 systemctl enable lightdm
@@ -74,17 +81,17 @@ systemctl set-default graphical.target
 sudo -u $username systemctl --user enable wireplumber.service
 
 # Beautiful bash
-git clone https://github.com/ChrisTitusTech/mybash
-cd mybash
-bash setup.sh
-cd $builddir
+#git clone https://github.com/ChrisTitusTech/mybash
+#cd mybash
+#bash setup.sh
+#cd $builddir
 
 # DWM Setup
-git clone https://github.com/ChrisTitusTech/dwm-titus
-cd dwm-titus
-make clean install
-cp dwm.desktop /usr/share/xsessions
-cd $builddir
+#git clone https://github.com/ChrisTitusTech/dwm-titus
+#cd dwm-titus
+#make clean install
+#cp dwm.desktop /usr/share/xsessions
+#cd $builddir
 
 # Use nala
 bash scripts/usenala
